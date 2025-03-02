@@ -13,7 +13,7 @@ export const injectMovieResource = (search: Signal<string>, sort: Signal<MovieCo
         request: () => search(),
         loader: ({request}) => {
           return request ?
-          httpClient.get<MovieResponse>(`http://www.omdbapi.com/?s=${request}`).pipe(
+          httpClient.get<MovieResponse>(`https://www.omdbapi.com/?s=${request}`).pipe(
             distinctUntilChanged(),
             debounceTime(500),
             map(res => {
@@ -25,7 +25,7 @@ export const injectMovieResource = (search: Signal<string>, sort: Signal<MovieCo
             map(res => res.Search),
             switchMap((movies) => {
               return forkJoin(
-                movies.map(movie => httpClient.get<Movie>(`http://www.omdbapi.com/?i=${movie.imdbID}`))
+                movies.map(movie => httpClient.get<Movie>(`https://www.omdbapi.com/?i=${movie.imdbID}`))
               )
             }),
             map(movies => {
