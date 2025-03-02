@@ -43,7 +43,6 @@ export class AppComponent {
     if (!this.movieResource.value()?.length) {
       return;
     }
-
     const val = column.sort === 'asc' ? -1 : 1;
     this.columns.update(prev => prev.map(col => {
       if (col.property === column.property) {
